@@ -50,7 +50,7 @@ public class AdapterArt extends RVAdapter<ctArtProveedor> {
                 public void onClick(View v) {
                     /*MainActivity  detalle = new MainActivity();
                     detalle.MuestraDetalle(item.getcAplicaciones(), contextc);*/
-                    globales.vg_iArticulo = item.getiArticulo();
+                    globales.g_ctArtProveedor = item;
                     Update(item.getcAplicaciones(), item.getDePrecio());
                 }
             });

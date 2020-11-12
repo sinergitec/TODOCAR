@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +41,9 @@ import com.sienrgitec.todocar.R;
 import com.sienrgitec.todocar.adaptadores.AdapterArt;
 import com.sienrgitec.todocar.configuracion.Globales;
 import com.sienrgitec.todocar.modelos.ctArtProveedor;
+import com.sienrgitec.todocar.modelos.opPedido;
+import com.sienrgitec.todocar.modelos.opPedidoDet;
+import com.sienrgitec.todocar.modelos.opPedidoProveedor;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -60,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     RequestQueue mRequestQueue;
 
     private Context context;
-    private Button btnBuscaArt, btnAddCarrito;
+    private Button btnBuscaArt, btnAddCarrito, btnMiCarrito, btnComements;
     private ImageButton btnImagenes, btnVideos, btnPDF;
     private EditText etCapturaArt;
     private TextView tvAplicaciones;
@@ -84,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
 
         btnBuscaArt   = (Button)   findViewById(R.id.btnBuscaArt);
         btnAddCarrito = (Button)   findViewById(R.id.button6);
+        btnMiCarrito  = (Button)   findViewById(R.id.button3);
+        btnComements  = (Button)   findViewById(R.id.button);
 
         btnImagenes  = (ImageButton)   findViewById(R.id.ibtnGaleria);
         btnVideos    = (ImageButton)   findViewById(R.id.imageButton);
@@ -98,35 +104,54 @@ public class MainActivity extends AppCompatActivity {
         recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.VERTICAL,false));
 
 
-
         btnBuscaArt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 BuscarArts();
             }
         });
+
         btnImagenes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 BuscarFotos( view);
             }
         });
+
         btnVideos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 BuscarVideos();
             }
         });
+
         btnPDF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 BuscarPDF();
             }
         });
+
         btnAddCarrito.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AgregarCarrito();
+            }
+        });
+
+        btnMiCarrito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MiCarrito();
+            }
+        });
+
+        btnComements.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast toast = Toast.makeText(MainActivity.this, "En Construccion!!", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
             }
         });
 
@@ -150,6 +175,12 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
             return;
         }
+
+
+
+        Toast toast = Toast.makeText(MainActivity.this, "Generando Consulta. Epsera...", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
 
         listafinal.clear();
 
@@ -262,7 +293,45 @@ public class MainActivity extends AppCompatActivity {
         Toast toast = Toast.makeText(MainActivity.this, "Agregando a Carrito", Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
+
+
+        /*Crea Encabezado*/
+        opPedido objNvoPed = new opPedido();
+        objNvoPed.setiPedido(0);
+        objNvoPed.setiUnidad(2);
+        objNvoPed.setDtFecha(null);
+        objNvoPed.setiEstadoPedido(1);
+        objNvoPed.setiNegocios(1);
+        objNvoPed.setDeTotalPiezas(0.0);
+
+
+
+        /*Crea Detalle*/
+        opPedidoDet objNvoArt = new opPedidoDet();
+        objNvoArt.setiPedido(0);
+        objNvoArt.setiPedidoProv(0);
+        objNvoArt.setiPartida(0);
+        objNvoArt.setDtFecha(null);
+        objNvoArt.setcArticulo(globales.g_ctArtProveedor.getcArticulo());
+        objNvoArt.setcDescripcion(globales.g_ctArtProveedor.getcDescripcion());
+        objNvoArt.setDePrecioVta(1);
+        objNvoArt.setDePrecioUnit(250);
+        objNvoArt.setDeCantidad(1);
+        objNvoArt.setDeImporte(250);
+        globales.opPedidoDetList.add(objNvoArt);
+
+
+
+        /*Crea enc x Proveedor*/
+        opPedidoProveedor objNvoPProv = new opPedidoProveedor();
+        objNvoPProv.setiPedido(0);
+        objNvoPProv.setiPedidoProv(1);
+        objNvoPProv.setiProveedor(25);
+
     }
 
-
+    public void MiCarrito(){
+        Intent carrito = new Intent(MainActivity.this, MiCarrito.class);
+        startActivity(carrito);
+    }
 }
