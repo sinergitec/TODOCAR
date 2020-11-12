@@ -56,10 +56,11 @@ public class MainActivity extends AppCompatActivity {
 
     public Globales globales;
     private String url = globales.URL;
-    private Integer vcAplicaciones;
+
     RequestQueue mRequestQueue;
+
     private Context context;
-    private Button btnBuscaArt;
+    private Button btnBuscaArt, btnAddCarrito;
     private ImageButton btnImagenes, btnVideos, btnPDF;
     private EditText etCapturaArt;
     private TextView tvAplicaciones;
@@ -67,9 +68,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     public RecyclerView recycler;
-
-
-
 
     public static ArrayList<ctArtProveedor> listafinal       = new ArrayList<>();
     public static List<ctArtProveedor> ctArtProviList = null;
@@ -84,11 +82,13 @@ public class MainActivity extends AppCompatActivity {
         //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
 
-        btnBuscaArt  = (Button)   findViewById(R.id.btnBuscaArt);
+        btnBuscaArt   = (Button)   findViewById(R.id.btnBuscaArt);
+        btnAddCarrito = (Button)   findViewById(R.id.button6);
 
         btnImagenes  = (ImageButton)   findViewById(R.id.ibtnGaleria);
         btnVideos    = (ImageButton)   findViewById(R.id.imageButton);
         btnPDF       = (ImageButton)   findViewById(R.id.imageButton3);
+
 
         etCapturaArt = (EditText) findViewById(R.id.etCapturaArt);
 
@@ -105,25 +105,28 @@ public class MainActivity extends AppCompatActivity {
                 BuscarArts();
             }
         });
-
         btnImagenes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 BuscarFotos( view);
             }
         });
-
         btnVideos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 BuscarVideos();
             }
         });
-
         btnPDF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 BuscarPDF();
+            }
+        });
+        btnAddCarrito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AgregarCarrito();
             }
         });
 
@@ -141,12 +144,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void BuscarArts(){
-        /*if (etCapturaArt.getText().toString().isEmpty()) {
+        if (etCapturaArt.getText().toString().isEmpty()) {
             Toast toast = Toast.makeText(MainActivity.this, "Debes capturar una palabrea clave  para buscar.", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
             return;
-        }*/
+        }
+
+        listafinal.clear();
 
         getmRequestQueue();
         String urlParams = String.format(url + "ctArtRefacciones?ipcAplicaciones=%1$s",  etCapturaArt.getText());
@@ -238,28 +243,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-
         mRequestQueue.add(jsonObjectRequest);
-
-
-
-    }
-
-    public String MuestraDetalle(String vcAplicaciones, Context ipcContext){
-
-        LayoutInflater inflater = (LayoutInflater)ipcContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.activity_main, null);
-        TextView estatus=(TextView)view.findViewById(R.id.etAplicaciones);
-        vcAplicaciones=estatus.getText().toString();
-
-        return vcAplicaciones;
     }
 
     public void BuscarFotos(View v){
         Log.e("buscando-fotos","C");
-
     }
 
     public void BuscarVideos(){
@@ -268,6 +256,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void BuscarPDF(){
         Log.e("buscando-PDF-Art--> ",globales.vg_iArticulo.toString());
+    }
+
+    public void AgregarCarrito(){
+        Toast toast = Toast.makeText(MainActivity.this, "Agregando a Carrito", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
 

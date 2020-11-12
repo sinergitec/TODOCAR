@@ -1,5 +1,6 @@
 package com.sienrgitec.todocar.adaptadores;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.sienrgitec.todocar.R;
@@ -38,7 +40,7 @@ public class AdapterArt extends RVAdapter<ctArtProveedor> {
 
 
     @Override
-    protected void bindView(final ctArtProveedor item, RVAdapter.ListViewHolder viewHolder) {
+    protected void bindView(final ctArtProveedor item, final RVAdapter.ListViewHolder viewHolder) {
         if (item != null) {
             final TextView tvDesc = (TextView) viewHolder.getView(R.id.tvDesc);
 
@@ -46,17 +48,29 @@ public class AdapterArt extends RVAdapter<ctArtProveedor> {
             tvDesc.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MainActivity  detalle = new MainActivity();
-                    detalle.MuestraDetalle(item.getcAplicaciones(), contextc);
+                    /*MainActivity  detalle = new MainActivity();
+                    detalle.MuestraDetalle(item.getcAplicaciones(), contextc);*/
                     globales.vg_iArticulo = item.getiArticulo();
-
+                    Update(item.getcAplicaciones(), item.getDePrecio());
                 }
             });
-
-
             tvDesc.setText(item.getcAplicaciones());
-
-
         }
+    }
+
+    public void Update(String vcAplicaiones ,Double vdePrecio){
+        TextView txtView    = (TextView) ((Activity)contextc).findViewById(R.id.etAplicaciones);
+        TextView tvDePrecio = (TextView) ((Activity)contextc).findViewById(R.id.editTextNumberDecimal);
+        RatingBar ratingBar = (RatingBar) ((Activity)contextc).findViewById(R.id.ratingBar);;
+
+        txtView.setText(vcAplicaiones);
+
+        if(vdePrecio != 0){
+            tvDePrecio.setText(vdePrecio + "0");
+        }else{
+            tvDePrecio.setText( "0.00");
+        }
+        ratingBar.setRating(Float.parseFloat(String.valueOf(5)));
+
     }
 }
