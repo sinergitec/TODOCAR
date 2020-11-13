@@ -303,8 +303,7 @@ public class MainActivity extends AppCompatActivity {
         objNvoPed.setiEstadoPedido(1);
         objNvoPed.setiNegocios(1);
         objNvoPed.setDeTotalPiezas(0.0);
-
-
+        globales.opPedidoList.add(objNvoPed);
 
         /*Crea Detalle*/
         opPedidoDet objNvoArt = new opPedidoDet();
@@ -321,12 +320,12 @@ public class MainActivity extends AppCompatActivity {
         globales.opPedidoDetList.add(objNvoArt);
 
 
-
         /*Crea enc x Proveedor*/
         opPedidoProveedor objNvoPProv = new opPedidoProveedor();
         objNvoPProv.setiPedido(0);
         objNvoPProv.setiPedidoProv(1);
         objNvoPProv.setiProveedor(25);
+        globales.opPedidoProvList.add(objNvoPProv);
 
     }
 
