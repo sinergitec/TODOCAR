@@ -32,6 +32,7 @@ import com.sienrgitec.todocar.modelos.ctArtProveedor;
 import com.sienrgitec.todocar.modelos.ctFormasPago;
 import com.sienrgitec.todocar.modelos.opPedido;
 import com.sienrgitec.todocar.modelos.opPedidoDet;
+import com.sienrgitec.todocar.modelos.opPedidoDomicilio;
 import com.sienrgitec.todocar.modelos.opPedidoPago;
 import com.sienrgitec.todocar.modelos.opPedidoProveedor;
 
@@ -207,8 +208,8 @@ public class AplicaPago extends AppCompatActivity {
         objNvoPago.setDePorcPropina(0.0);
         objNvoPago.setDtCreado(null);
         objNvoPago.setDtModificado(null);
-        objNvoPago.setcUsuCrea("androsohg@gmail.com");
-        objNvoPago.setiCliente(130);
+        objNvoPago.setcUsuCrea(globales.g_ctUsuario.getcUsuario());
+        objNvoPago.setiCliente(globales.g_ctUsuario.getiPersona());
         objNvoPago.setiOrigenFP(1);
         objNvoPago.setcCuenta("100");
         opPedPAgoList.add(objNvoPago);
@@ -242,17 +243,24 @@ public class AplicaPago extends AppCompatActivity {
                 new TypeToken<ArrayList<opPedidoPago>>() {
                 }.getType());
 
+        String JS_opPedDom = gson.toJson(
+                globales.opPedidDomList,
+                new TypeToken<ArrayList<opPedidoDomicilio>>() {
+                }.getType());
+
         try {
             JSONArray opPedido   = new JSONArray(JS_opPedido);
             JSONArray opPedidoProveedor = new JSONArray(JS_oPedidoProveedor);
             JSONArray opPedidoDet  = new JSONArray(JS_opPedidoDet);
             JSONArray opPedidoPago  = new JSONArray(JS_opPedPago);
+            JSONArray opPedidoDomicilio  = new JSONArray(JS_opPedDom);
 
 
             jsonDataSet.put("tt_opPedido",  opPedido);
             jsonDataSet.put("tt_opPedidoProveedor",opPedidoProveedor);
             jsonDataSet.put("tt_opPedidoDet", opPedidoDet);
             jsonDataSet.put("tt_opPedidoPago", opPedidoPago);
+            jsonDataSet.put("tt_opPedidoDomicilio", opPedidoDomicilio);
 
 
 

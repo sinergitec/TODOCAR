@@ -7,6 +7,7 @@ import com.sienrgitec.todocar.modelos.ctFormasPago;
 import com.sienrgitec.todocar.modelos.ctUsuario;
 import com.sienrgitec.todocar.modelos.opPedido;
 import com.sienrgitec.todocar.modelos.opPedidoDet;
+import com.sienrgitec.todocar.modelos.opPedidoDomicilio;
 import com.sienrgitec.todocar.modelos.opPedidoProveedor;
 
 import java.util.ArrayList;
@@ -26,4 +27,5 @@ public class Globales  {
     public static ArrayList<opPedido>    opPedidoList    = new ArrayList<>();
     public static ArrayList<opPedidoDet> opPedidoDetList = new ArrayList<>();
     public static ArrayList<opPedidoProveedor> opPedidoProvList = new ArrayList<>();
+    public static ArrayList<opPedidoDomicilio> opPedidDomList = new ArrayList<>();
 }

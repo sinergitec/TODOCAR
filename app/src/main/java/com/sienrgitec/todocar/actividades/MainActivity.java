@@ -43,6 +43,7 @@ import com.sienrgitec.todocar.configuracion.Globales;
 import com.sienrgitec.todocar.modelos.ctArtProveedor;
 import com.sienrgitec.todocar.modelos.opPedido;
 import com.sienrgitec.todocar.modelos.opPedidoDet;
+import com.sienrgitec.todocar.modelos.opPedidoDomicilio;
 import com.sienrgitec.todocar.modelos.opPedidoProveedor;
 
 import org.json.JSONArray;
@@ -313,6 +314,8 @@ public class MainActivity extends AppCompatActivity {
         objNvoArt.setDePrecioUnit(250);
         objNvoArt.setDeCantidad(1);
         objNvoArt.setDeImporte(250);
+        objNvoArt.setcUsuCrea(globales.g_ctUsuario.getcUsuario());
+        objNvoArt.setcUsuModificado(globales.g_ctUsuario.getcUsuario());
         globales.opPedidoDetList.add(objNvoArt);
 
 
@@ -326,10 +329,10 @@ public class MainActivity extends AppCompatActivity {
         objNvoPed.setiEstadoPedido(1);
         objNvoPed.setiNegocios(1);
         objNvoPed.setDeTotalPiezas(0.0);
-        objNvoPed.setiCliente(130);
+        objNvoPed.setiCliente(globales.g_ctUsuario.getiPersona());
+        objNvoPed.setcUsuCrea(globales.g_ctUsuario.getcUsuario());
+        objNvoPed.setcUsuModifica(globales.g_ctUsuario.getcUsuario());
         globales.opPedidoList.add(objNvoPed);
-
-
 
 
         /*Crea enc x Proveedor*/
@@ -337,7 +340,22 @@ public class MainActivity extends AppCompatActivity {
         objNvoPProv.setiPedido(0);
         objNvoPProv.setiPedidoProv(1);
         objNvoPProv.setiProveedor(25);
+        objNvoPProv.setcUsuCrea(globales.g_ctUsuario.getcUsuario());
+        objNvoPProv.setcUsuModifica(globales.g_ctUsuario.getcUsuario());
         globales.opPedidoProvList.add(objNvoPProv);
+
+
+        /*Crea Domicilio Ped*/
+        opPedidoDomicilio objNvoDom = new opPedidoDomicilio();
+        objNvoDom.setiPedido(0);
+        objNvoDom.setiDomicilio(globales.g_ctDomicilio.getiDomicilio());
+        objNvoDom.setiCliente(globales.g_ctCliente.getiCliente());
+        objNvoDom.setlHabitual(true);
+        objNvoDom.setcUsuCrea(globales.g_ctUsuario.getcUsuario());
+        objNvoDom.setcUsuModifica(globales.g_ctUsuario.getcUsuario());
+        objNvoDom.setDtCreado(null);
+        objNvoDom.setDtModificado(null);
+        globales.opPedidDomList.add(objNvoDom);
 
     }
 

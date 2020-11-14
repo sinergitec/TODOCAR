@@ -10,7 +10,15 @@ public class opPedidoDomicilio implements Serializable {
     private String dtCreado;
     private String dtModificado;
     private String cUsuModifica;
+    private String cUsuCrea;
 
+    public String getcUsuCrea() {
+        return cUsuCrea;
+    }
+
+    public void setcUsuCrea(String cUsuCrea) {
+        this.cUsuCrea = cUsuCrea;
+    }
 
     public Integer getiPedido() {
         return iPedido;
