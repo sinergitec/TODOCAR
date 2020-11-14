@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     private Button btnBuscaArt, btnAddCarrito, btnMiCarrito, btnComements;
     private ImageButton btnImagenes, btnVideos, btnPDF;
     private EditText etCapturaArt;
-    private TextView tvAplicaciones;
+    private TextView tvAplicaciones, tvCliente;
 
 
 
@@ -99,6 +99,9 @@ public class MainActivity extends AppCompatActivity {
         etCapturaArt = (EditText) findViewById(R.id.etCapturaArt);
 
         tvAplicaciones = (TextView) findViewById(R.id.etAplicaciones);
+        tvCliente      = (TextView) findViewById(R.id.tvCliente);
+
+        tvCliente.setText("TOCAR.MX HOLA! " + globales.g_ctCliente.getcNombre());
 
         recycler      = (RecyclerView) findViewById(R.id.listaArt);
         recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.VERTICAL,false));
@@ -295,29 +298,38 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
 
 
-        /*Crea Encabezado*/
-        opPedido objNvoPed = new opPedido();
-        objNvoPed.setiPedido(0);
-        objNvoPed.setiUnidad(2);
-        objNvoPed.setDtFecha(null);
-        objNvoPed.setiEstadoPedido(1);
-        objNvoPed.setiNegocios(1);
-        objNvoPed.setDeTotalPiezas(0.0);
-        globales.opPedidoList.add(objNvoPed);
+
 
         /*Crea Detalle*/
         opPedidoDet objNvoArt = new opPedidoDet();
         objNvoArt.setiPedido(0);
-        objNvoArt.setiPedidoProv(0);
-        objNvoArt.setiPartida(0);
+        objNvoArt.setiPedidoProv(1);
+        objNvoArt.setiPartida(1);
         objNvoArt.setDtFecha(null);
+        objNvoArt.setiArticulo(globales.g_ctArtProveedor.getiArticulo());
         objNvoArt.setcArticulo(globales.g_ctArtProveedor.getcArticulo());
         objNvoArt.setcDescripcion(globales.g_ctArtProveedor.getcDescripcion());
-        objNvoArt.setDePrecioVta(1);
+        objNvoArt.setDePrecioVta(250);
         objNvoArt.setDePrecioUnit(250);
         objNvoArt.setDeCantidad(1);
         objNvoArt.setDeImporte(250);
         globales.opPedidoDetList.add(objNvoArt);
+
+
+
+
+        /*Crea Encabezado*/
+        opPedido objNvoPed = new opPedido();
+        objNvoPed.setiPedido(0);
+        objNvoPed.setiUnidad(4);
+        objNvoPed.setDtFecha(null);
+        objNvoPed.setiEstadoPedido(1);
+        objNvoPed.setiNegocios(1);
+        objNvoPed.setDeTotalPiezas(0.0);
+        objNvoPed.setiCliente(130);
+        globales.opPedidoList.add(objNvoPed);
+
+
 
 
         /*Crea enc x Proveedor*/

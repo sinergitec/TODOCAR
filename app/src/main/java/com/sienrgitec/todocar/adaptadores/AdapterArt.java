@@ -43,6 +43,9 @@ public class AdapterArt extends RVAdapter<ctArtProveedor> {
     protected void bindView(final ctArtProveedor item, final RVAdapter.ListViewHolder viewHolder) {
         if (item != null) {
             final TextView tvDesc = (TextView) viewHolder.getView(R.id.tvDesc);
+            TextView tvMarca  = (TextView) viewHolder.getView(R.id.tvcMarca);
+            TextView tvnParte = (TextView) viewHolder.getView(R.id.tvNParte);
+
 
 
             tvDesc.setOnClickListener(new View.OnClickListener() {
@@ -51,14 +54,18 @@ public class AdapterArt extends RVAdapter<ctArtProveedor> {
                     /*MainActivity  detalle = new MainActivity();
                     detalle.MuestraDetalle(item.getcAplicaciones(), contextc);*/
                     globales.g_ctArtProveedor = item;
-                    Update(item.getcAplicaciones(), item.getDePrecio());
+                    Update(item.getcAplicaciones(), item.getDePrecio(), item.getDePeso());
                 }
             });
+
+            tvMarca.setText(item.getcMarca());
+            tvnParte.setText(item.getcArticulo());
             tvDesc.setText(item.getcAplicaciones());
+
         }
     }
 
-    public void Update(String vcAplicaiones ,Double vdePrecio){
+    public void Update(String vcAplicaiones ,Double vdePrecio, Double vdeRating){
         TextView txtView    = (TextView) ((Activity)contextc).findViewById(R.id.etAplicaciones);
         TextView tvDePrecio = (TextView) ((Activity)contextc).findViewById(R.id.editTextNumberDecimal);
         RatingBar ratingBar = (RatingBar) ((Activity)contextc).findViewById(R.id.ratingBar);;
@@ -70,7 +77,7 @@ public class AdapterArt extends RVAdapter<ctArtProveedor> {
         }else{
             tvDePrecio.setText( "0.00");
         }
-        ratingBar.setRating(Float.parseFloat(String.valueOf(5)));
+        ratingBar.setRating(Float.parseFloat(String.valueOf(vdeRating)));
 
     }
 }

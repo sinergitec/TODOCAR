@@ -52,6 +52,31 @@ public class ctArtProveedor implements Serializable {
     @Expose
     private Double dePrecio;
 
+
+    @SerializedName("cMarca")
+    @Expose
+    private String cMarca;
+
+    @SerializedName("dePeso")
+    @Expose
+    private Double dePeso;
+
+    public String getcMarca() {
+        return cMarca;
+    }
+
+    public Double getDePeso() {
+        return dePeso;
+    }
+
+    public void setDePeso(Double dePeso) {
+        this.dePeso = dePeso;
+    }
+
+    public void setcMarca(String cMarca) {
+        this.cMarca = cMarca;
+    }
+
     public Integer getiArticulo() {
         return iArticulo;
     }
