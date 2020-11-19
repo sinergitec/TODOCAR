@@ -4,23 +4,26 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sienrgitec.todocar.R;
 import com.sienrgitec.todocar.actividades.MainActivity;
 import com.sienrgitec.todocar.configuracion.Globales;
 import com.sienrgitec.todocar.modelos.ctArtProveedor;
 
-public class AdapterArt extends RVAdapter<ctArtProveedor> {
+public class AdapterArt extends RVAdapter<ctArtProveedor> implements View.OnClickListener {
 
     private Context contextc;
     public Globales globales;
 
+    private View.OnClickListener listener;
 
     public AdapterArt(Context context, RVAdapter.OnViewHolderClick<ctArtProveedor> listener) {
         super(context, listener);
@@ -34,6 +37,7 @@ public class AdapterArt extends RVAdapter<ctArtProveedor> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view    = inflater.inflate(R.layout.ctartprov_list, viewGroup, false);
 
+        view.setOnClickListener(this);
         return view;
 
     }
@@ -48,36 +52,23 @@ public class AdapterArt extends RVAdapter<ctArtProveedor> {
 
 
 
-            tvDesc.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    /*MainActivity  detalle = new MainActivity();
-                    detalle.MuestraDetalle(item.getcAplicaciones(), contextc);*/
-                    globales.g_ctArtProveedor = item;
-                    Update(item.getcAplicaciones(), item.getDePrecio(), item.getDePeso());
-                }
-            });
-
             tvMarca.setText(item.getcMarca());
             tvnParte.setText(item.getcArticulo());
-            tvDesc.setText(item.getcAplicaciones());
+            tvDesc.setText(item.getcDescripcion());
 
         }
     }
 
-    public void Update(String vcAplicaiones ,Double vdePrecio, Double vdeRating){
-        TextView txtView    = (TextView) ((Activity)contextc).findViewById(R.id.etAplicaciones);
-        TextView tvDePrecio = (TextView) ((Activity)contextc).findViewById(R.id.editTextNumberDecimal);
-        RatingBar ratingBar = (RatingBar) ((Activity)contextc).findViewById(R.id.ratingBar);;
 
-        txtView.setText(vcAplicaiones);
 
-        if(vdePrecio != 0){
-            tvDePrecio.setText(vdePrecio + "0");
-        }else{
-            tvDePrecio.setText( "0.00");
+    public void setOnClickListener(View.OnClickListener listener){
+        this.listener= listener;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(listener != null){
+            listener.onClick(view);
         }
-        ratingBar.setRating(Float.parseFloat(String.valueOf(vdeRating)));
-
     }
 }

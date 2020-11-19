@@ -202,7 +202,7 @@ public class AplicaPago extends AppCompatActivity {
         objNvoPago.setiPedido(0);
         objNvoPago.setiPartida(1);
         objNvoPago.setiFormaPago(globales.g_ctFormasPago.getiFormaPago());
-        objNvoPago.setDeMonto(130.00);
+        objNvoPago.setDeMonto(globales.opPedidoList.get(0).getDeImporte());
         objNvoPago.setDeProcComision(0.0);
         objNvoPago.setDeComision(0.0);
         objNvoPago.setDePorcPropina(0.0);

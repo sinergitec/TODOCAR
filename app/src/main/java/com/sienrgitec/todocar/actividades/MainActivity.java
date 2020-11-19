@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Html;
@@ -24,6 +25,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +52,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -68,15 +71,15 @@ public class MainActivity extends AppCompatActivity {
     private Button btnBuscaArt, btnAddCarrito, btnMiCarrito, btnComements;
     private ImageButton btnImagenes, btnVideos, btnPDF;
     private EditText etCapturaArt;
-    private TextView tvAplicaciones, tvCliente;
-
-
+    private TextView  tvAplicaciones, tvCliente, tvPrecio;
+    private RatingBar ratingBar;
 
     public RecyclerView recycler;
 
     public static ArrayList<ctArtProveedor> listafinal       = new ArrayList<>();
     public static List<ctArtProveedor> ctArtProviList = null;
 
+    public  int viCantidad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,8 +104,12 @@ public class MainActivity extends AppCompatActivity {
 
         tvAplicaciones = (TextView) findViewById(R.id.etAplicaciones);
         tvCliente      = (TextView) findViewById(R.id.tvCliente);
+        tvPrecio       = (TextView) findViewById(R.id.editTextNumberDecimal);
+
+        ratingBar = (RatingBar) findViewById(R.id.ratingBar);;
 
         tvCliente.setText("TOCAR.MX HOLA! " + globales.g_ctCliente.getcNombre());
+
 
         recycler      = (RecyclerView) findViewById(R.id.listaArt);
         recycler.setLayoutManager(new LinearLayoutManager(MainActivity.this,LinearLayoutManager.VERTICAL,false));
@@ -159,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
+
     }
 
     public void getmRequestQueue() {
@@ -180,7 +189,9 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-
+        tvPrecio.setText("0.00");
+        tvAplicaciones.setText("");
+        ratingBar.setRating(0);
 
         Toast toast = Toast.makeText(MainActivity.this, "Generando Consulta. Epsera...", Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER, 0, 0);
@@ -209,7 +220,6 @@ public class MainActivity extends AppCompatActivity {
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
 
-
                             } else {
 
                                 Log.e("mainActivity-->", "else: " + etCapturaArt.getText());
@@ -217,17 +227,29 @@ public class MainActivity extends AppCompatActivity {
                                 JSONArray tt_ctArtProveedor  = ds_Articulos.getJSONArray("tt_ctArtProveedor");
                                 ctArtProviList     = Arrays.asList(new Gson().fromJson(tt_ctArtProveedor.toString(), ctArtProveedor[].class));
 
-
-
                                 for(ctArtProveedor obj: ctArtProviList){
                                     listafinal.add(obj);
                                     Log.e("mainActivity-->", "ok");
                                 }
 
-
                                 AdapterArt adapter = new AdapterArt(MainActivity.this,null);
                                 adapter.setList((List<ctArtProveedor>) listafinal);
-                                recycler.setAdapter(adapter);
+                                adapter.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+
+                                        globales.g_ctArtProveedor = listafinal.get(recycler.getChildAdapterPosition(view));
+                                        Toast toast = Toast.makeText(MainActivity.this, "Seleccionado: " + listafinal.get(recycler.getChildAdapterPosition(view)).getcArticulo(), Toast.LENGTH_SHORT);
+                                        toast.setGravity(Gravity.CENTER, 0, 0);
+                                        toast.show();
+
+                                        tvAplicaciones.setText(listafinal.get(recycler.getChildAdapterPosition(view)).getcAplicaciones());
+                                        tvPrecio.setText(listafinal.get(recycler.getChildAdapterPosition(view)).getDePrecio().toString());
+                                        ratingBar.setRating(Float.parseFloat(String.valueOf(listafinal.get(recycler.getChildAdapterPosition(view)).getDePeso())));
+
+                                    }
+                                }) ;
+                                 recycler.setAdapter(adapter);
 
 
                             }
@@ -294,73 +316,87 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void AgregarCarrito(){
-        Toast toast = Toast.makeText(MainActivity.this, "Agregando a Carrito", Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
+
+        final opPedidoDet[] opPedidoDetUltimo = new opPedidoDet[1];
+
+        if(globales.vg_lPideCant.equals(true)){
+            LayoutInflater layoutInflater = LayoutInflater.from(MainActivity.this);
+            View promptView = layoutInflater.inflate(R.layout.prompt,null);
+            AlertDialog.Builder alertdialog = new AlertDialog.Builder(MainActivity.this);
+            alertdialog.setTitle(Html.fromHtml("<font color ='#FF0000'> Capture la cantidad a comprar?  </font>"));
+            alertdialog.setView(promptView);
+
+            final EditText e1 = (EditText) promptView.findViewById(R.id.editText);
+
+            alertdialog.setCancelable(false)
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            if(e1.getText().toString().isEmpty()){
+                                Toast toast = Toast.makeText(MainActivity.this, "La cantidad no puede estar vacía", Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                                return;
+                            }
+                            if(e1.getText().toString().equals(0)){
+                                Toast toast = Toast.makeText(MainActivity.this, "La cantidad no puede ser cero", Toast.LENGTH_SHORT);
+                                toast.setGravity(Gravity.CENTER, 0, 0);
+                                toast.show();
+                                return;
+                            }
+
+                            String vcNumero = e1.getText().toString();
+                            viCantidad =  Integer.valueOf(vcNumero);
+
+                            int viPartida = 0;
+                            if (globales.opPedidoDetList.size() == 0) {
+                                viPartida = 1;
+                            } else {
+                                opPedidoDetUltimo[0] = globales.opPedidoDetList.get(globales.opPedidoDetList.size() - 1);
+                                viPartida = opPedidoDetUltimo[0].getiPartida() + 1;
+                            }
+
+                            /*Crea Detalle*/
+                            opPedidoDet objNvoArt = new opPedidoDet();
+                            objNvoArt.setiPedido(0);
+                            objNvoArt.setiPedidoProv(25);
+                            objNvoArt.setiPartida(viPartida);
+                            objNvoArt.setDtFecha(null);
+                            objNvoArt.setiArticulo(globales.g_ctArtProveedor.getiArticulo());
+                            objNvoArt.setcArticulo(globales.g_ctArtProveedor.getcArticulo());
+                            objNvoArt.setcDescripcion(globales.g_ctArtProveedor.getcDescripcion());
+                            objNvoArt.setDePrecioVta(globales.g_ctArtProveedor.getDePrecio());
+                            objNvoArt.setDePrecioUnit(globales.g_ctArtProveedor.getDePrecio());
+                            objNvoArt.setDeCantidad((double) viCantidad);
+                            objNvoArt.setDeImporte(globales.g_ctArtProveedor.getDePrecio() * (double) viCantidad);
+                            objNvoArt.setcUsuCrea(globales.g_ctUsuario.getcUsuario());
+                            objNvoArt.setcUsuModificado(globales.g_ctUsuario.getcUsuario());
+                            globales.opPedidoDetList.add(objNvoArt);
 
 
+                            Toast toast = Toast.makeText(MainActivity.this, "Agregando a Carrito", Toast.LENGTH_SHORT);
+                            toast.setGravity(Gravity.CENTER, 0, 0);
+                            toast.show();
 
+                        }
+                    })
+                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.cancel();
 
-        /*Crea Detalle*/
-        opPedidoDet objNvoArt = new opPedidoDet();
-        objNvoArt.setiPedido(0);
-        objNvoArt.setiPedidoProv(1);
-        objNvoArt.setiPartida(1);
-        objNvoArt.setDtFecha(null);
-        objNvoArt.setiArticulo(globales.g_ctArtProveedor.getiArticulo());
-        objNvoArt.setcArticulo(globales.g_ctArtProveedor.getcArticulo());
-        objNvoArt.setcDescripcion(globales.g_ctArtProveedor.getcDescripcion());
-        objNvoArt.setDePrecioVta(250);
-        objNvoArt.setDePrecioUnit(250);
-        objNvoArt.setDeCantidad(1);
-        objNvoArt.setDeImporte(250);
-        objNvoArt.setcUsuCrea(globales.g_ctUsuario.getcUsuario());
-        objNvoArt.setcUsuModificado(globales.g_ctUsuario.getcUsuario());
-        globales.opPedidoDetList.add(objNvoArt);
-
-
-
-
-        /*Crea Encabezado*/
-        opPedido objNvoPed = new opPedido();
-        objNvoPed.setiPedido(0);
-        objNvoPed.setiUnidad(4);
-        objNvoPed.setDtFecha(null);
-        objNvoPed.setiEstadoPedido(1);
-        objNvoPed.setiNegocios(1);
-        objNvoPed.setDeTotalPiezas(0.0);
-        objNvoPed.setiCliente(globales.g_ctUsuario.getiPersona());
-        objNvoPed.setcUsuCrea(globales.g_ctUsuario.getcUsuario());
-        objNvoPed.setcUsuModifica(globales.g_ctUsuario.getcUsuario());
-        globales.opPedidoList.add(objNvoPed);
-
-
-        /*Crea enc x Proveedor*/
-        opPedidoProveedor objNvoPProv = new opPedidoProveedor();
-        objNvoPProv.setiPedido(0);
-        objNvoPProv.setiPedidoProv(1);
-        objNvoPProv.setiProveedor(25);
-        objNvoPProv.setcUsuCrea(globales.g_ctUsuario.getcUsuario());
-        objNvoPProv.setcUsuModifica(globales.g_ctUsuario.getcUsuario());
-        globales.opPedidoProvList.add(objNvoPProv);
-
-
-        /*Crea Domicilio Ped*/
-        opPedidoDomicilio objNvoDom = new opPedidoDomicilio();
-        objNvoDom.setiPedido(0);
-        objNvoDom.setiDomicilio(globales.g_ctDomicilio.getiDomicilio());
-        objNvoDom.setiCliente(globales.g_ctCliente.getiCliente());
-        objNvoDom.setlHabitual(true);
-        objNvoDom.setcUsuCrea(globales.g_ctUsuario.getcUsuario());
-        objNvoDom.setcUsuModifica(globales.g_ctUsuario.getcUsuario());
-        objNvoDom.setDtCreado(null);
-        objNvoDom.setDtModificado(null);
-        globales.opPedidDomList.add(objNvoDom);
-
+                        }
+                    });
+            alertdialog.create();
+            alertdialog.show();
+        }
     }
 
     public void MiCarrito(){
         Intent carrito = new Intent(MainActivity.this, MiCarrito.class);
         startActivity(carrito);
     }
+
+
 }

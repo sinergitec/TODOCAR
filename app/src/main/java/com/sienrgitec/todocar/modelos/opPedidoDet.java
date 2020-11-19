@@ -13,17 +13,17 @@ public class opPedidoDet implements Serializable {
     private String cObs;
     private Boolean lPesado;
     private Integer iUMedida;
-    private Integer dePrecio;
-    private Integer dePorcImp;
-    private Integer deImpuesto;
-    private Integer dePrecioVta;
-    private Integer dePorcDescto;
-    private Integer deDescuento;
-    private Integer dePrecioUnit;
-    private Integer deCantidad;
-    private Integer deImporte;
-    private Integer deCantCancela;
-    private Object dtCancela;
+    private Double dePrecio;
+    private Double dePorcImp;
+    private Double deImpuesto;
+    private Double dePrecioVta;
+    private Double dePorcDescto;
+    private Double deDescuento;
+    private Double dePrecioUnit;
+    private Double deCantidad;
+    private Double deImporte;
+    private Double deCantCancela;
+    private String dtCancela;
     private String dtCreado;
     private Integer iRazon;
     private String dtModificado;
@@ -112,91 +112,91 @@ public class opPedidoDet implements Serializable {
         this.iUMedida = iUMedida;
     }
 
-    public Integer getDePrecio() {
+    public Double getDePrecio() {
         return dePrecio;
     }
 
-    public void setDePrecio(Integer dePrecio) {
+    public void setDePrecio(Double dePrecio) {
         this.dePrecio = dePrecio;
     }
 
-    public Integer getDePorcImp() {
+    public Double getDePorcImp() {
         return dePorcImp;
     }
 
-    public void setDePorcImp(Integer dePorcImp) {
+    public void setDePorcImp(Double dePorcImp) {
         this.dePorcImp = dePorcImp;
     }
 
-    public Integer getDeImpuesto() {
+    public Double getDeImpuesto() {
         return deImpuesto;
     }
 
-    public void setDeImpuesto(Integer deImpuesto) {
+    public void setDeImpuesto(Double deImpuesto) {
         this.deImpuesto = deImpuesto;
     }
 
-    public Integer getDePrecioVta() {
+    public Double getDePrecioVta() {
         return dePrecioVta;
     }
 
-    public void setDePrecioVta(Integer dePrecioVta) {
+    public void setDePrecioVta(Double dePrecioVta) {
         this.dePrecioVta = dePrecioVta;
     }
 
-    public Integer getDePorcDescto() {
+    public Double getDePorcDescto() {
         return dePorcDescto;
     }
 
-    public void setDePorcDescto(Integer dePorcDescto) {
+    public void setDePorcDescto(Double dePorcDescto) {
         this.dePorcDescto = dePorcDescto;
     }
 
-    public Integer getDeDescuento() {
+    public Double getDeDescuento() {
         return deDescuento;
     }
 
-    public void setDeDescuento(Integer deDescuento) {
+    public void setDeDescuento(Double deDescuento) {
         this.deDescuento = deDescuento;
     }
 
-    public Integer getDePrecioUnit() {
+    public Double getDePrecioUnit() {
         return dePrecioUnit;
     }
 
-    public void setDePrecioUnit(Integer dePrecioUnit) {
+    public void setDePrecioUnit(Double dePrecioUnit) {
         this.dePrecioUnit = dePrecioUnit;
     }
 
-    public Integer getDeCantidad() {
+    public Double getDeCantidad() {
         return deCantidad;
     }
 
-    public void setDeCantidad(Integer deCantidad) {
+    public void setDeCantidad(Double deCantidad) {
         this.deCantidad = deCantidad;
     }
 
-    public Integer getDeImporte() {
+    public Double getDeImporte() {
         return deImporte;
     }
 
-    public void setDeImporte(Integer deImporte) {
+    public void setDeImporte(Double deImporte) {
         this.deImporte = deImporte;
     }
 
-    public Integer getDeCantCancela() {
+    public Double getDeCantCancela() {
         return deCantCancela;
     }
 
-    public void setDeCantCancela(Integer deCantCancela) {
+    public void setDeCantCancela(Double deCantCancela) {
         this.deCantCancela = deCantCancela;
     }
 
-    public Object getDtCancela() {
+    public String getDtCancela() {
         return dtCancela;
     }
 
-    public void setDtCancela(Object dtCancela) {
+    public void setDtCancela(String dtCancela) {
         this.dtCancela = dtCancela;
     }
 

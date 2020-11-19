@@ -46,7 +46,7 @@ public class AdapterFPago extends RVAdapter<ctFormasPago> {
 
 
             if(item.getCvePago().equals( "PP") ){
-                new DownloadImageTask(ibtnPago).execute("https://cdn.pixabay.com/photo/2018/05/08/21/29/paypal-3384015_960_720.png");
+               new DownloadImageTask(ibtnPago).execute("https://cdn.pixabay.com/photo/2018/05/08/21/29/paypal-3384015_960_720.png");
             }
             if(item.getCvePago().equals("CP") ){
                 new DownloadImageTask(ibtnPago).execute("https://www.mastercard.es/es-es/consumidores/escoge-tu-tarjeta/tarjetas-prepago/_jcr_content/contentpar/herolight/image.adaptive.479.high.jpg/1483985272758.jpg");

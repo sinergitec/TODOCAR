@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     tools:context=".actividades.MainActivity">
-
 
 
     <TextView
         android:id="@+id/tvCliente"
         android:layout_width="0dp"
         android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/et_buscador"
         android:text="TODOCAR.MX, HOLA! RECTIFICADORA GASTON"
+        android:textColor="@color/colorText"
         android:textSize="14sp"
         app:layout_constraintEnd_toStartOf="@+id/button3"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +25,7 @@
         android:id="@+id/button3"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:text="ok"
+        android:background="@mipmap/carritosale"
         app:layout_constraintEnd_toStartOf="@+id/button4"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,10 +43,10 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="12dp"
-        android:background="@color/colorAccent"
+        android:layout_marginTop="10dp"
         android:clipToPadding="false"
         android:foregroundGravity="center"
         android:overScrollMode="never"
@@ -51,8 +54,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvCliente"
-        android:layout_alignParentLeft="true">
+        app:layout_constraintTop_toBottomOf="@+id/tvCliente">
 
     </androidx.viewpager.widget.ViewPager>
 
@@ -60,13 +62,15 @@
         android:id="@+id/etCapturaArt"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginTop="5dp"
-        android:ems="10"
-        android:inputType="textPersonName"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/et_buscador"
+        android:textColor="@color/colorText"
+        android:textColorHint="@color/colorText"
         android:hint="buscador"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/btnBuscaArt"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewPager"
-        app:layout_constraintEnd_toStartOf="@+id/btnBuscaArt"/>
+        app:layout_constraintTop_toBottomOf="@+id/viewPager" />
 
     <Button
         android:id="@+id/btnBuscaArt"
@@ -98,29 +102,30 @@
         app:layout_constraintVertical_bias="0.056" />
 
 
-
     <TextView
         android:id="@+id/etAplicaciones"
         android:layout_width="0dp"
-        android:layout_height="30dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/aplicaciones"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="Aplicaiones"
         android:inputType="textMultiLine"
         android:scrollbars="vertical"
-        android:hint="Aplicaiones"
+        android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/guideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-        android:visibility="visible"/>
+        app:layout_constraintTop_toBottomOf="@+id/listaArt" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="513dp" />
+        app:layout_constraintGuide_begin="538dp" />
 
 
     <ImageButton
@@ -179,7 +184,6 @@
         android:layout_marginRight="4dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:text="$45.00"
         app:layout_constraintBottom_toTopOf="@+id/button6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etAplicaciones" />
@@ -201,7 +205,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.85499316" />
 
 
     <RatingBar
@@ -252,7 +256,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_end="59dp" />
 
     <ImageButton
         android:id="@+id/imageButton4"

@@ -17,6 +17,9 @@ public class Globales  {
     //public static  String  URL = "http://sinergitecdemo.ddns.net:8083/painal/rest/painalService/";
 
     public static Integer vg_iArticulo = 0;
+    public static Integer vg_iPartida = 0;
+    public static String  vg_cDescripcion = "";
+    public static Boolean vg_lPideCant = true;
 
     public static ctArtProveedor g_ctArtProveedor = null;
     public static ctFormasPago   g_ctFormasPago   = null;
