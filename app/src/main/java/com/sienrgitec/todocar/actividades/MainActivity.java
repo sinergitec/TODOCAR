@@ -28,6 +28,7 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ViewFlipper;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -71,8 +72,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnBuscaArt, btnAddCarrito, btnMiCarrito, btnComements;
     private ImageButton btnImagenes, btnVideos, btnPDF;
     private EditText etCapturaArt;
-    private TextView  tvAplicaciones, tvCliente, tvPrecio;
+    private TextView tvAplicaciones, tvCliente, tvPrecio;
     private RatingBar ratingBar;
+    private ViewFlipper viewPublic;
 
     public RecyclerView recycler;
 
@@ -109,6 +111,8 @@ public class MainActivity extends AppCompatActivity {
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);;
 
         tvCliente.setText("TOCAR.MX HOLA! " + globales.g_ctCliente.getcNombre());
+
+        viewPublic = (ViewFlipper) findViewById(R.id.viewPublic);
 
 
         recycler      = (RecyclerView) findViewById(R.id.listaArt);
@@ -167,6 +171,22 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        int imgPublic [] = {R.drawable.luk, R.drawable.luk};
+
+        for (int img: imgPublic){
+            CreaVisorPublicidad(img);
+        }
+
+    }
+    public void CreaVisorPublicidad(int images){
+        ImageView imageView = new ImageView(this);
+        imageView.setBackgroundResource(images);
+
+        viewPublic.addView(imageView);
+        viewPublic.setFlipInterval(3000);
+        viewPublic.setAutoStart(true);
+        viewPublic.setInAnimation(this, android.R.anim.slide_in_left);
+        viewPublic.setInAnimation(this, android.R.anim.slide_out_right);
 
     }
 
