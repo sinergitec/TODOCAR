@@ -87,18 +87,15 @@
             app:layout_constraintTop_toBottomOf="@+id/viewPublic" />
 
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listaArt"
-            android:layout_width="0dp"
-            android:layout_height="270dp"
-            android:layout_marginTop="3dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etCapturaArt"
-            app:layout_constraintVertical_bias="0.056" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listaArt"
+        android:layout_width="0dp"
+        android:layout_height="270dp"
+        android:layout_marginTop="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etCapturaArt" />
 
 
         <TextView
@@ -119,12 +116,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/listaArt" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_begin="538dp" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="199dp" />
 
 
         <ImageButton
@@ -177,7 +174,7 @@
         <EditText
             android:id="@+id/editTextNumberDecimal"
             android:layout_width="120dp"
-            android:layout_height="45dp"
+            android:layout_height="0dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
             android:layout_marginRight="4dp"
@@ -190,7 +187,7 @@
         <Button
             android:id="@+id/button6"
             android:layout_width="0dp"
-            android:layout_height="45dp"
+            android:layout_height="0dp"
 
             app:layout_constraintBottom_toTopOf="@+id/guideline6"
             app:layout_constraintEnd_toEndOf="parent"
