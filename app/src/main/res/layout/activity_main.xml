@@ -107,6 +107,7 @@
             android:ems="10"
             android:gravity="start|top"
             android:hint="Aplicaiones"
+            android:textColor="@color/colorAccent"
             android:inputType="textMultiLine"
             android:scrollbars="vertical"
             android:visibility="visible"
@@ -263,6 +264,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imagebtnBuscaArt"
             app:layout_constraintStart_toStartOf="parent"
+            android:background="@color/colorText"
             app:srcCompat="@mipmap/wallet" />
 
         <ImageButton
@@ -274,7 +276,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/imageButton6"
             app:layout_constraintStart_toEndOf="@+id/imageButton4"
-            app:srcCompat="@mipmap/ic_launcher" />
+            android:background="@color/colorText"
+            app:srcCompat="@mipmap/folder" />
 
         <ImageButton
             android:id="@+id/imageButton6"
@@ -285,7 +288,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/frameLayout"
             app:layout_constraintStart_toEndOf="@+id/imagebtnBuscaArt"
-            android:src="@drawable/ic_historico" />
+            android:background="@color/colorText"
+            app:srcCompat="@mipmap/evalua" />
 
         <FrameLayout
             android:id="@+id/frameLayout"

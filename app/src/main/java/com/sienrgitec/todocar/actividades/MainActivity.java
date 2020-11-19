@@ -171,7 +171,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        int imgPublic [] = {R.drawable.luk, R.drawable.luk};
+        int imgPublic [] = {R.drawable.luk, R.drawable.p1, R.drawable.p2, R.drawable.p3, R.drawable.p4, R.drawable.p5, R.drawable.p6, R.drawable.p7};
 
         for (int img: imgPublic){
             CreaVisorPublicidad(img);
@@ -218,6 +218,7 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
 
         listafinal.clear();
+        globales.g_ctArtProveedor = null;
 
         getmRequestQueue();
         String urlParams = String.format(url + "ctArtRefacciones?ipcAplicaciones=%1$s",  etCapturaArt.getText());
@@ -249,7 +250,6 @@ public class MainActivity extends AppCompatActivity {
 
                                 for(ctArtProveedor obj: ctArtProviList){
                                     listafinal.add(obj);
-                                    Log.e("mainActivity-->", "ok");
                                 }
 
                                 AdapterArt adapter = new AdapterArt(MainActivity.this,null);
@@ -324,7 +324,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void BuscarFotos(View v){
-        Log.e("buscando-fotos","C");
+
+        if(globales.g_ctArtProveedor == null){
+            Toast toast = Toast.makeText(getApplicationContext(), "Debes seleccionar un artículo . ", Toast.LENGTH_SHORT);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            return;
+        }
+        startActivity(new Intent(MainActivity.this, VisordeImagenes.class));
     }
 
     public void BuscarVideos(){

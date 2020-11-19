@@ -16,9 +16,21 @@ public class ctArtProveedor implements Serializable {
     @Expose
     private Integer iProveedor;
 
+    @SerializedName("iDomicilio")
+    @Expose
+    private Integer iDomicilio;
+
     @SerializedName("cArticulo")
     @Expose
     private String cArticulo;
+
+    public Integer getiDomicilio() {
+        return iDomicilio;
+    }
+
+    public void setiDomicilio(Integer iDomicilio) {
+        this.iDomicilio = iDomicilio;
+    }
 
     @SerializedName("cAplicaciones")
     @Expose
