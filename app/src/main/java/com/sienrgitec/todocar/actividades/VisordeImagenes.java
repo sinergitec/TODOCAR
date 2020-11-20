@@ -73,7 +73,7 @@ public class VisordeImagenes extends AppCompatActivity {
     }
 
     public void CargaMultimedia() {
-
+        listafinal.clear();
 
         getmRequestQueue();
         String urlParams = String.format(url + "ctInfoArt?ipiArticulo=%1$s&ipiProveedor=%2$s&ipiDomicilio=%3$s&ipcTipo=%4$s",

@@ -305,12 +305,13 @@ public class AplicaPago extends AppCompatActivity {
                                 startActivity(carrito);
 
 
-                                /*globales.ctPainaniList.clear();
-                                globales.ctDomicilioList.clear();
-                                globales.ctContactoList.clear();
-                                globales.ctUsuarioList.clear();
+                                globales.opPedidoList.clear();
+                                globales.opPedidoProvList.clear();
+                                globales.opPedidoDetList.clear();
+                                globales.opPedidDomList.clear();
+                                opPedPAgoList.clear();
 
-                                finish();*/
+
                             }
 
 

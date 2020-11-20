@@ -149,7 +149,7 @@ public class MiCarrito extends AppCompatActivity {
         /*Crea enc x Proveedor*/
         opPedidoProveedor objNvoPProv = new opPedidoProveedor();
         objNvoPProv.setiPedido(0);
-        objNvoPProv.setiPedidoProv(1);
+        objNvoPProv.setiPedidoProv(25);
         objNvoPProv.setiProveedor(25);
         objNvoPProv.setDeTotalPzas(vdeTotArt);
         objNvoPProv.setDeImporte(vdeImporte);
