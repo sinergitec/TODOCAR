@@ -23,10 +23,20 @@ public class opPedidoProveedor implements Serializable {
     private Integer iPedido;
     private Integer iPedidoProv;
     private Integer iProveedor;
+    private Integer iDomicilio;
     private Boolean lContestado;
     private Boolean lPagado;
     private Boolean lSurtido;
     private Object id;
+
+
+    public Integer getiDomicilio() {
+        return iDomicilio;
+    }
+
+    public void setiDomicilio(Integer iDomicilio) {
+        this.iDomicilio = iDomicilio;
+    }
 
     public Boolean getlSurtido() {
         return lSurtido;

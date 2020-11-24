@@ -151,6 +151,7 @@ public class MiCarrito extends AppCompatActivity {
         objNvoPProv.setiPedido(0);
         objNvoPProv.setiPedidoProv(25);
         objNvoPProv.setiProveedor(25);
+        objNvoPProv.setiDomicilio(1);
         objNvoPProv.setDeTotalPzas(vdeTotArt);
         objNvoPProv.setDeImporte(vdeImporte);
         objNvoPProv.setcUsuCrea(globales.g_ctUsuario.getcUsuario());

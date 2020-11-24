@@ -7,13 +7,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
@@ -42,8 +45,10 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.sienrgitec.todocar.R;
 import com.sienrgitec.todocar.adaptadores.AdapterArt;
+import com.sienrgitec.todocar.adaptadores.AdapterImg;
 import com.sienrgitec.todocar.configuracion.Globales;
 import com.sienrgitec.todocar.modelos.ctArtProveedor;
+import com.sienrgitec.todocar.modelos.ctInformacionArt;
 import com.sienrgitec.todocar.modelos.opPedido;
 import com.sienrgitec.todocar.modelos.opPedidoDet;
 import com.sienrgitec.todocar.modelos.opPedidoDomicilio;
@@ -53,6 +58,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -81,15 +87,16 @@ public class MainActivity extends AppCompatActivity {
     public static ArrayList<ctArtProveedor> listafinal       = new ArrayList<>();
     public static List<ctArtProveedor> ctArtProviList = null;
 
+
     public  int viCantidad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        onTrimMemory(0x0000003c);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-        //this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+
 
 
         btnBuscaArt   = (Button)   findViewById(R.id.btnBuscaArt);
@@ -129,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         btnImagenes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                BuscarFotos( view);
+                BuscarFotos(view);
             }
         });
 
@@ -178,6 +185,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
     public void CreaVisorPublicidad(int images){
         ImageView imageView = new ImageView(this);
         imageView.setBackgroundResource(images);
@@ -269,7 +277,7 @@ public class MainActivity extends AppCompatActivity {
 
                                     }
                                 }) ;
-                                 recycler.setAdapter(adapter);
+                                recycler.setAdapter(adapter);
 
 
                             }
@@ -335,11 +343,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void BuscarVideos(){
-        Log.e("buscando-fotos-Art--> ",globales.vg_iArticulo.toString());
+       // Log.e("buscando-fotos-Art--> ",globales.vg_iArticulo.toString());
     }
 
     public void BuscarPDF(){
-        Log.e("buscando-PDF-Art--> ",globales.vg_iArticulo.toString());
+        startActivity(new Intent(MainActivity.this, VisorPDF.class));
     }
 
     public void AgregarCarrito(){

@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".actividades.VisordeImagenes"></activity>
+        <activity android:name=".actividades.VisorPDF"></activity>
+        <activity android:name=".actividades.VisordeImagenes" />
         <activity android:name=".actividades.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

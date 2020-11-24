@@ -46,7 +46,7 @@ public class AdapterArt extends RVAdapter<ctArtProveedor> implements View.OnClic
     @Override
     protected void bindView(final ctArtProveedor item, final RVAdapter.ListViewHolder viewHolder) {
         if (item != null) {
-            final TextView tvDesc = (TextView) viewHolder.getView(R.id.tvDesc);
+            final TextView tvDescs = (TextView) viewHolder.getView(R.id.tvDescr);
             TextView tvMarca  = (TextView) viewHolder.getView(R.id.tvcMarca);
             TextView tvnParte = (TextView) viewHolder.getView(R.id.tvNParte);
 
@@ -54,7 +54,7 @@ public class AdapterArt extends RVAdapter<ctArtProveedor> implements View.OnClic
 
             tvMarca.setText(item.getcMarca());
             tvnParte.setText(item.getcArticulo());
-            tvDesc.setText(item.getcDescripcion());
+            tvDescs.setText(item.getcDescripcion());
 
         }
     }
