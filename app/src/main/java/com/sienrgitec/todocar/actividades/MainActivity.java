@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        onTrimMemory(0x0000003c);
+        //onTrimMemory(0x0000003c);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
 
@@ -344,6 +344,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void BuscarVideos(){
        // Log.e("buscando-fotos-Art--> ",globales.vg_iArticulo.toString());
+        startActivity(new Intent(MainActivity.this, ViewVideo.class));
     }
 
     public void BuscarPDF(){
