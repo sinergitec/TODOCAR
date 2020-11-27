@@ -396,7 +396,7 @@ public class MainActivity extends AppCompatActivity {
                             /*Crea Detalle*/
                             opPedidoDet objNvoArt = new opPedidoDet();
                             objNvoArt.setiPedido(0);
-                            objNvoArt.setiPedidoProv(25);
+                            objNvoArt.setiPedidoProv(1);
                             objNvoArt.setiPartida(viPartida);
                             objNvoArt.setDtFecha(null);
                             objNvoArt.setiArticulo(globales.g_ctArtProveedor.getiArticulo());
