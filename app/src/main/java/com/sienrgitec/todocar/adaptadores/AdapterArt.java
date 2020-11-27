@@ -50,16 +50,15 @@ public class AdapterArt extends RVAdapter<ctArtProveedor> implements View.OnClic
             TextView tvMarca  = (TextView) viewHolder.getView(R.id.tvcMarca);
             TextView tvnParte = (TextView) viewHolder.getView(R.id.tvNParte);
 
-
-
             tvMarca.setText(item.getcMarca());
             tvnParte.setText(item.getcArticulo());
             tvDescs.setText(item.getcDescripcion());
 
+
+
+
         }
     }
-
-
 
     public void setOnClickListener(View.OnClickListener listener){
         this.listener= listener;

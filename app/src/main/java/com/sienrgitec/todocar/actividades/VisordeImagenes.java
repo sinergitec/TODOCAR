@@ -8,12 +8,16 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -50,6 +54,12 @@ public class VisordeImagenes extends AppCompatActivity {
     private String url = globales.URL;
     RequestQueue mRequestQueue;
 
+    ImageView imageView;
+    Matrix matrix = new Matrix();
+    Float scale = 1f;
+    ScaleGestureDetector SGD;
+
+
     public static ArrayList<ctInformacionArt> listafinal  = new ArrayList<>();
     private RecyclerView recycler;
     
@@ -58,12 +68,35 @@ public class VisordeImagenes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visorde_imagenes);
 
-        recycler      = (RecyclerView) findViewById(R.id.rvImagenes);
-        recycler.setLayoutManager(new LinearLayoutManager(VisordeImagenes.this,LinearLayoutManager.VERTICAL,false));
+        /*recycler      = (RecyclerView) findViewById(R.id.rvImagenes);
+        recycler.setLayoutManager(new LinearLayoutManager(VisordeImagenes.this,LinearLayoutManager.HORIZONTAL,false));
+*/
 
+        imageView = (ImageView) findViewById(R.id.imvArt);
+        SGD=new ScaleGestureDetector(this, new ScaleListener());
         CargaMultimedia();
     }
 
+
+    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener{
+
+        @Override
+        public boolean onScale(ScaleGestureDetector detector){
+
+            scale= scale*detector.getScaleFactor();
+            scale=Math.max(0.1f,Math.min(scale,5f));
+            matrix.setScale(scale,scale);
+            imageView.setImageMatrix(matrix);
+            return true;
+        }
+
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        SGD.onTouchEvent(event);
+        return true;
+    }
 
     public void getmRequestQueue() {
         try{
@@ -108,15 +141,22 @@ public class VisordeImagenes extends AppCompatActivity {
                                 globales.g_opInfoArtList = Arrays.asList(new Gson().fromJson(tt_ctInformacionArt.toString(), ctInformacionArt[].class));
 
 
-
-
-
                                 for (ctInformacionArt objImg: globales.g_opInfoArtList ){
                                     listafinal.add(objImg);
                                 }
-                                AdapterImg adaptering = new AdapterImg(VisordeImagenes.this,  null);
+
+
+                                LinearLayoutManager llm = new LinearLayoutManager(VisordeImagenes.this,LinearLayoutManager.HORIZONTAL,false);
+                                recycler      = (RecyclerView) findViewById(R.id.rvImagenes);
+                                recycler.setLayoutManager(llm);
+                                AdapterImg adapterImg = new AdapterImg(VisordeImagenes.this,  null);
+                                adapterImg.setList(listafinal);
+                                recycler.setAdapter(adapterImg);
+
+
+                                /*AdapterImg adaptering = new AdapterImg(VisordeImagenes.this,  null);
                                 adaptering.setList(listafinal);
-                                recycler.setAdapter(adaptering);
+                                recycler.setAdapter(adaptering);*/
 
                             }
                         } catch (JSONException e) {
