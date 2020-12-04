@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,11 +43,19 @@ public class MiCarrito extends AppCompatActivity {
     private Globales globales;
     private Button btnPagar;
     private TextView tvTArt, tvTImporte, tvArtSelecc;
-    private ImageView ibtnBorrar, ibtnActualizar;
+    private ImageView ibtnBorrar, ibtnEdita, ibtnAct;
+    private EditText etNvaCant;
+
 
     private opPedidoDet renglon;
+    private Integer viPdaSelecc;
+    private String  vcDescSelecc;
+
+    private CarritoAdapter ActCant;
 
     public static ArrayList<opPedidoDet> listafinal       = new ArrayList<>();
+    public static ArrayList<opPedidoDet> listafinAct       = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +75,15 @@ public class MiCarrito extends AppCompatActivity {
             }
         });
 
-        tvTArt     =  (TextView) findViewById(R.id.tvTotArtD);
-        tvTImporte =  (TextView) findViewById(R.id.tvImporteD);
+        tvTArt      = (TextView) findViewById(R.id.tvTotArtD);
+        tvTImporte  = (TextView) findViewById(R.id.tvImporteD);
         tvArtSelecc = (TextView) findViewById(R.id.tvArtSelecc);
 
-        ibtnBorrar = (ImageView) findViewById(R.id.imageView);
-        ibtnActualizar = (ImageView) findViewById(R.id.imageView2);
+        ibtnBorrar     = (ImageView) findViewById(R.id.imageView);
+        ibtnEdita = (ImageView) findViewById(R.id.imageView2);
+        ibtnAct    = (ImageView) findViewById(R.id.ibtnOK);
+
+        etNvaCant = (EditText) findViewById(R.id.etNvaCant);
 
         ibtnBorrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,31 +92,70 @@ public class MiCarrito extends AppCompatActivity {
             }
         });
 
+
+        ibtnEdita.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ibtnBorrar.setVisibility(View.INVISIBLE);
+                ibtnEdita.setVisibility(View.INVISIBLE);
+                ibtnAct.setVisibility(View.VISIBLE);
+                etNvaCant.setVisibility(View.VISIBLE);
+
+            }
+        });
+
+
+        ibtnAct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActCantxPda();
+            }
+        });
+
         CreaDetalle();
     }
 
     public void CreaDetalle(){
         listafinal.clear();
-        CarritoAdapter adapter = new CarritoAdapter(MiCarrito.this,null);
+        /*CarritoAdapter adapter = new CarritoAdapter(MiCarrito.this,null);
         adapter.setList((List<opPedidoDet>) listafinal);
-
-       /* adapter.setOnClickListener(new View.OnClickListener() {
+        adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 tvArtSelecc.setText(listafinal.get(recycler.getChildAdapterPosition(view)).getcDescripcion());
                 globales.vg_cDescripcion = (listafinal.get(recycler.getChildAdapterPosition(view)).getcDescripcion());;
-
-
-
                 globales.vg_iPartida = (listafinal.get(recycler.getChildAdapterPosition(view)).getiPartida());
                 renglon              = (listafinal.get(recycler.getChildAdapterPosition(view)));
-
                 Log.e("micarrito --> ", "pda " +globales.vg_iPartida );
-
             }
-        }) ;*/
+        }) ;
+        recycler.setAdapter(adapter);*/
 
+
+        CarritoAdapter adapter = new CarritoAdapter(MiCarrito.this,null);
+        adapter.setList((List<opPedidoDet>) listafinal);
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                /*Toast toast = Toast.makeText(MiCarrito.this, "Seleccionado: " + listafinal.get(recycler.getChildAdapterPosition(view)).getcArticulo(), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();*/
+
+                viPdaSelecc  = listafinal.get(recycler.getChildAdapterPosition(view)).getiPartida();
+                vcDescSelecc = listafinal.get(recycler.getChildAdapterPosition(view)).getcArticulo();
+                tvArtSelecc.setText(listafinal.get(recycler.getChildAdapterPosition(view)).getcDescripcion());
+
+
+                ibtnBorrar.setVisibility(View.VISIBLE);
+                ibtnEdita.setVisibility(View.VISIBLE);
+                ibtnAct.setVisibility(View.INVISIBLE);
+                etNvaCant.setVisibility(View.INVISIBLE);
+            }
+        }) ;
         recycler.setAdapter(adapter);
+
+
         CalculaTotales();
     }
 
@@ -124,6 +176,7 @@ public class MiCarrito extends AppCompatActivity {
 
 
     }
+
     public void SeleccPago(){
         double vdeTotArt = 0, vdeImporte = 0;
 
@@ -176,10 +229,13 @@ public class MiCarrito extends AppCompatActivity {
         startActivity(pagos);
 
     }
+
     public void EliminaPda(){
+        Log.e("miCarrito-->", "Pda Selecciona " + viPdaSelecc);
+
         AlertDialog.Builder alert = new AlertDialog.Builder(MiCarrito.this);
         alert.setTitle("Eliminar Articulo ");
-        alert.setMessage("¿Desea Borrar el Articulo?" + " " + globales.vg_iPartida + " " + globales.vg_cDescripcion);
+        alert.setMessage("¿Desea Borrar el Articulo " + vcDescSelecc + "?");
         alert.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
 
             public void onClick(DialogInterface dialog, int which) {
@@ -187,44 +243,64 @@ public class MiCarrito extends AppCompatActivity {
                 for (Iterator<opPedidoDet> itr = globales.opPedidoDetList.iterator(); itr.hasNext(); ) {
                     opPedidoDet Obj = itr.next();
 
-                    if (Obj.getiPartida().equals(globales.vg_iPartida)) {
-
-                        itr.remove(); // right call
+                    if (Obj.getiPartida().equals(viPdaSelecc)) {
+                         itr.remove(); // right call
                     }
                 }
-
-                globales.opPedidoDetList.remove(globales.vg_iPartida);
+                globales.opPedidoDetList.remove(viPdaSelecc);
                 renglon = null;
 
-                Log.e("mis articulos--> " , "antes de aceptar");
-
-                for (opPedidoDet objnvos: globales.opPedidoDetList){
-                    Log.e("mis articulos--> " , objnvos.getcDescripcion());
-                }
-                Log.e("MiCarrito--> " , "despues de for construyendo adapter");
-
                 listafinal.clear();
-               /* for(opPedidoDet objLista: globales.opPedidoDetList){
+
+                for(opPedidoDet objLista: globales.opPedidoDetList){
                     listafinal.add(objLista);
-                }*/
-
-
+                }
                 CarritoAdapter adapter = new CarritoAdapter(MiCarrito.this,null);
                 adapter.setList((List<opPedidoDet>) listafinal);
                 recycler.setAdapter(adapter);
-                CalculaTotales();
+                tvArtSelecc.setText("");
             }
         });
         alert.setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                // close dialog
-                /*reglon = null;
-                lvLista.clearChoices();
-                adapter.notifyDataSetChanged();
-                lvLista.setAdapter(adapter);*/
                 dialog.cancel();
             }
         });
         alert.show();
+
+        CalculaTotales();
+    }
+
+    public void ActCantxPda (){
+        Log.e("Pda--> Seleccionada ", viPdaSelecc + " <--");
+        listafinAct.clear();
+
+        for (Iterator<opPedidoDet> itr = globales.opPedidoDetList.iterator(); itr.hasNext(); ) {
+            opPedidoDet Obj = itr.next();
+
+            if (Obj.getiPartida().equals(viPdaSelecc)) {
+
+                Obj.setDeCantidad(Double.parseDouble(etNvaCant.getText().toString()));
+                listafinal.add(Obj);
+
+            }
+            listafinAct.add(Obj);
+        }
+
+
+       listafinal.clear();
+
+
+
+
+        recycler.removeAllViews();
+        CarritoAdapter adapter = new CarritoAdapter(MiCarrito.this,null);
+        adapter.setList((List<opPedidoDet>) listafinAct);
+        recycler.setAdapter(adapter);
+
+
+
+
+        CalculaTotales();
     }
 }

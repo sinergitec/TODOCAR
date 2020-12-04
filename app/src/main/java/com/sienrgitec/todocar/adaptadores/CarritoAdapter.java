@@ -22,6 +22,8 @@ import java.text.DecimalFormat;
 public class CarritoAdapter extends RVAdapter<opPedidoDet> implements View.OnClickListener {
 
     private Context contextc;
+
+
     public Globales globales;
 
     private View.OnClickListener listener;
@@ -52,7 +54,9 @@ public class CarritoAdapter extends RVAdapter<opPedidoDet> implements View.OnCli
             TextView tvDescPda = (TextView) viewHolder.getView(R.id.tvDescPda);
             TextView tvCanPda  = (TextView) viewHolder.getView(R.id.tvCanPda);
             TextView tvImporte = (TextView) viewHolder.getView(R.id.tvImporte);
+
             ImageView ibtnEditar = (ImageView) viewHolder.getView(R.id.imageView8);
+            ImageView ibtnEliminar = (ImageView) viewHolder.getView(R.id.imageView10);
 
             tvDescPda.setText("Articulo: " + item.getcDescripcion());
 
@@ -64,15 +68,16 @@ public class CarritoAdapter extends RVAdapter<opPedidoDet> implements View.OnCli
 
 
 
-            ibtnEditar.setOnClickListener(new View.OnClickListener() {
+            /*ibtnEditar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    /*MainActivity  detalle = new MainActivity();
-                    detalle.MuestraDetalle(item.getcAplicaciones(), contextc);*/
-
+                    MainActivity  detalle = new MainActivity();
+                    detalle.MuestraDetalle(item.getcAplicaciones(), contextc);
                     Update(item.getcDescripcion(), item.getiPartida());
                 }
-            });
+            });*/
+
+
 
         }
     }
@@ -89,12 +94,11 @@ public class CarritoAdapter extends RVAdapter<opPedidoDet> implements View.OnCli
         }
     }
 
-    public void Update(String vcAplicaiones, int viPartida){
+    /*public void Update(String vcAplicaiones, int viPartida){
         TextView txtView    = (TextView) ((Activity)contextc).findViewById(R.id.tvArtSelecc);
         txtView.setText(vcAplicaiones);
 
         globales.vg_iPartida = viPartida;
 
-
-    }
+    }*/
 }
