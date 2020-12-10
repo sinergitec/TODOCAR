@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
         globales.g_ctArtProveedor = null;
 
         getmRequestQueue();
-        String urlParams = String.format(url + "ctArtRefacciones?ipcAplicaciones=%1$s",  etCapturaArt.getText());
+        String urlParams = String.format(url + "ctArtProveedor?ipcAplicaciones=%1$s",  etCapturaArt.getText());
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, urlParams, null, new Response.Listener<JSONObject>() {
                     @RequiresApi(api = Build.VERSION_CODES.N)

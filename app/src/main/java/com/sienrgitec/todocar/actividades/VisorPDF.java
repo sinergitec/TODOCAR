@@ -93,7 +93,7 @@ public class VisorPDF extends AppCompatActivity {
         listafinal.clear();
 
         getmRequestQueue();
-        String urlParams = String.format(url + "ctInfoArt?ipiArticulo=%1$s&ipiProveedor=%2$s&ipiDomicilio=%3$s&ipcTipo=%4$s",
+        String urlParams = String.format(url + "ctInformacionArt?ipiArticulo=%1$s&ipiProveedor=%2$s&ipiDomicilio=%3$s&ipcTipo=%4$s",
                 globales.g_ctArtProveedor.getiArticulo(), globales.g_ctArtProveedor.getiProveedor(), globales.g_ctArtProveedor.getiDomicilio(),"PDF");
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, urlParams, null, new Response.Listener<JSONObject>() {

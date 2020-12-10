@@ -278,7 +278,7 @@ public class AplicaPago extends AppCompatActivity {
         getmRequestQueue();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, url + "opPedRefacc/", jsonBody, new Response.Listener<JSONObject>() {
+                (Request.Method.POST, url + "opPedido/", jsonBody, new Response.Listener<JSONObject>() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onResponse(JSONObject response) {

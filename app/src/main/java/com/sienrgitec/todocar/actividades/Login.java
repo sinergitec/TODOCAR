@@ -99,7 +99,7 @@ public class Login extends AppCompatActivity {
 
         getmRequestQueue();
 
-        String urlParams = String.format(url + "ctLoginRefacc?ipcUsuario=%1$s&ipcPassword=%2$s",
+        String urlParams = String.format(url + "loginCli?ipcUsuario=%1$s&ipcPassword=%2$s",
                 vcUsuLog, password);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
