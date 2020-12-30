@@ -189,6 +189,7 @@ public class MiCarrito extends AppCompatActivity {
         opPedido objNvoPed = new opPedido();
         objNvoPed.setiPedido(0);
         objNvoPed.setiUnidad(4);
+        objNvoPed.setcOrigen("APP");
         objNvoPed.setDtFecha(null);
         objNvoPed.setiEstadoPedido(1);
         objNvoPed.setiNegocios(1);
@@ -275,13 +276,19 @@ public class MiCarrito extends AppCompatActivity {
         Log.e("Pda--> Seleccionada ", viPdaSelecc + " <--");
         listafinAct.clear();
 
+        Double vdeNvoImporte = 0.0;
+
         for (Iterator<opPedidoDet> itr = globales.opPedidoDetList.iterator(); itr.hasNext(); ) {
             opPedidoDet Obj = itr.next();
 
             if (Obj.getiPartida().equals(viPdaSelecc)) {
 
                 Obj.setDeCantidad(Double.parseDouble(etNvaCant.getText().toString()));
+                vdeNvoImporte = Double.parseDouble(etNvaCant.getText().toString()) *  Obj.getDePrecioVta();;
+                Obj.setDeImporte(vdeNvoImporte);
                 listafinal.add(Obj);
+
+                Log.e("mi valor en nvo", "vale--> " + vdeNvoImporte);
 
             }
             listafinAct.add(Obj);

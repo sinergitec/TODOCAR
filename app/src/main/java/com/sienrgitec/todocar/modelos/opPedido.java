@@ -28,6 +28,7 @@ public class opPedido implements Serializable {
     private String  dtModificado;
     private String  dtReasignado;
     private String  dtRegistrado;
+    private String  cOrigen;
     private Integer iCliente;
     private Integer iEstadoPedido;
     private Integer iNegocios;
@@ -36,6 +37,14 @@ public class opPedido implements Serializable {
     private Integer iUnidad;
     private Object id;
 
+
+    public String getcOrigen() {
+        return cOrigen;
+    }
+
+    public void setcOrigen(String cOrigen) {
+        this.cOrigen = cOrigen;
+    }
 
     public Double getDePorcPago() {
         return dePorcPago;

@@ -2,44 +2,18 @@ package com.sienrgitec.todocar.modelos;
 
 import java.io.Serializable;
 
-public class ctUsuario implements Serializable {
-    private String cUsuario;
+public class ctTelefono implements Serializable {
     private Integer iPersona;
     private Integer iTipoPersona;
-    private String cPassword;
+    private Integer iTelefono;
+    private Integer iTipoTelefono;
+    private String cTelefono;
     private Boolean lActivo;
     private String dtCreado;
     private String dtModificado;
-    private String cUsuarioC;
     private String cUsuCrea;
     private String cUsuModifica;
-    private Integer iDomicilio;
     private Object id;
-
-
-    public String getcUsuCrea() {
-        return cUsuCrea;
-    }
-
-    public void setcUsuCrea(String cUsuCrea) {
-        this.cUsuCrea = cUsuCrea;
-    }
-
-    public String getcUsuModifica() {
-        return cUsuModifica;
-    }
-
-    public void setcUsuModifica(String cUsuModifica) {
-        this.cUsuModifica = cUsuModifica;
-    }
-
-    public String getcUsuario() {
-        return cUsuario;
-    }
-
-    public void setcUsuario(String cUsuario) {
-        this.cUsuario = cUsuario;
-    }
 
     public Integer getiPersona() {
         return iPersona;
@@ -47,14 +21,6 @@ public class ctUsuario implements Serializable {
 
     public void setiPersona(Integer iPersona) {
         this.iPersona = iPersona;
-    }
-
-    public Integer getiDomicilio() {
-        return iDomicilio;
-    }
-
-    public void setiDomicilio(Integer iDomicilio) {
-        this.iDomicilio = iDomicilio;
     }
 
     public Integer getiTipoPersona() {
@@ -65,12 +31,28 @@ public class ctUsuario implements Serializable {
         this.iTipoPersona = iTipoPersona;
     }
 
-    public String getcPassword() {
-        return cPassword;
+    public Integer getiTelefono() {
+        return iTelefono;
     }
 
-    public void setcPassword(String cPassword) {
-        this.cPassword = cPassword;
+    public void setiTelefono(Integer iTelefono) {
+        this.iTelefono = iTelefono;
+    }
+
+    public Integer getiTipoTelefono() {
+        return iTipoTelefono;
+    }
+
+    public void setiTipoTelefono(Integer iTipoTelefono) {
+        this.iTipoTelefono = iTipoTelefono;
+    }
+
+    public String getcTelefono() {
+        return cTelefono;
+    }
+
+    public void setcTelefono(String cTelefono) {
+        this.cTelefono = cTelefono;
     }
 
     public Boolean getlActivo() {
@@ -97,12 +79,20 @@ public class ctUsuario implements Serializable {
         this.dtModificado = dtModificado;
     }
 
-    public String getcUsuarioC() {
-        return cUsuarioC;
+    public String getcUsuCrea() {
+        return cUsuCrea;
     }
 
-    public void setcUsuarioC(String cUsuarioC) {
-        this.cUsuarioC = cUsuarioC;
+    public void setcUsuCrea(String cUsuCrea) {
+        this.cUsuCrea = cUsuCrea;
+    }
+
+    public String getcUsuModifica() {
+        return cUsuModifica;
+    }
+
+    public void setcUsuModifica(String cUsuModifica) {
+        this.cUsuModifica = cUsuModifica;
     }
 
     public Object getId() {

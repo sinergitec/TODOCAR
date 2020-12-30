@@ -14,6 +14,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -44,6 +45,7 @@ public class Login extends AppCompatActivity {
     private String   url = globales.URL;
     private EditText etUsuario, etPassword;
     private Button   btnEntrar;
+    private TextView txtNvoUsuario, txtRecupera;
 
     private static RequestQueue mRequestQueue;
 
@@ -58,11 +60,22 @@ public class Login extends AppCompatActivity {
 
         etUsuario  = (EditText) findViewById(R.id.etUsuario);
         etPassword = (EditText) findViewById(R.id.etPassw);
+
         btnEntrar  = (Button)   findViewById(R.id.loginBtn);
+
+        txtNvoUsuario = (TextView) findViewById(R.id.registro);
+        txtRecupera   = (TextView) findViewById(R.id.recupera);
 
         btnEntrar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Entrar();
+            }
+        });
+
+        txtNvoUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Login.this, Registro.class));
             }
         });
     }
@@ -112,8 +125,9 @@ public class Login extends AppCompatActivity {
                             JSONObject respuesta = response.getJSONObject("response");
                             Log.i("respuesta--->", respuesta.toString());
 
-                            String Mensaje = respuesta.getString("opcError");
-                            Boolean Error = respuesta.getBoolean("oplError");
+                            String Mensaje  = respuesta.getString("opcError");
+                            Boolean Error   = respuesta.getBoolean("oplError");
+                            Boolean vlNuevoCli = respuesta.getBoolean("oplTieneDom");
 
 
                             JSONObject ds_ctUsuario   = respuesta.getJSONObject("tt_ctUsuario");
@@ -141,8 +155,12 @@ public class Login extends AppCompatActivity {
                                 globales.g_ctDomicilio = ctDomicilioList.get(0);
                                 globales.g_ctCliente   = ctClienteList.get(0);
 
-                                startActivity(new Intent(Login.this, MainActivity.class));
+                                if(vlNuevoCli == true ){
+                                    startActivity(new Intent(Login.this, CreaDomicilio.class));
 
+                                }else {
+                                    startActivity(new Intent(Login.this, MainActivity.class));
+                                }
                             }
                         } catch (JSONException e) {
                             btnEntrar.setEnabled(true);

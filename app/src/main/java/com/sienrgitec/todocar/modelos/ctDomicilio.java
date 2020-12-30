@@ -3,6 +3,7 @@ package com.sienrgitec.todocar.modelos;
 import java.io.Serializable;
 
 public class ctDomicilio  implements Serializable {
+    private Integer iPersona;
     private Integer iDomicilio;
     private Integer iTipoPersona;
     private Integer iTipoDomicilio;
@@ -24,6 +25,15 @@ public class ctDomicilio  implements Serializable {
     private Double deLongitud;
     private Double deLatitud;
     private Object id;
+
+
+    public Integer getiPersona() {
+        return iPersona;
+    }
+
+    public void setiPersona(Integer iPersona) {
+        this.iPersona = iPersona;
+    }
 
     public Double getDeLongitud() {
         return deLongitud;
