@@ -216,8 +216,8 @@ public class MiCarrito extends AppCompatActivity {
         /*Crea Domicilio Ped*/
         opPedidoDomicilio objNvoDom = new opPedidoDomicilio();
         objNvoDom.setiPedido(0);
-        objNvoDom.setiDomicilio(globales.g_ctDomicilio.getiDomicilio());
-        objNvoDom.setiCliente(globales.g_ctCliente.getiCliente());
+        objNvoDom.setiDomicilio(1);
+        objNvoDom.setiCliente(137);
         objNvoDom.setlHabitual(true);
         objNvoDom.setcUsuCrea(globales.g_ctUsuario.getcUsuario());
         objNvoDom.setcUsuModifica(globales.g_ctUsuario.getcUsuario());

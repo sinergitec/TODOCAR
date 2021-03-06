@@ -78,6 +78,10 @@ public class Registro extends AppCompatActivity {
     }
 
     public void CreaNvoCli (){
+        ctClienteNvo.clear();
+        ctTelefonoNvo.clear();
+        ctTelefonoNvo.clear();
+
         if (etNombre.getText().toString().isEmpty()) {
             Toast toast = Toast.makeText(Registro.this, "No se capturó el nombre de usuario", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
@@ -101,7 +105,23 @@ public class Registro extends AppCompatActivity {
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
             return;
-        }
+        }else{
+            String email    = etCorreo.getText().toString().trim();
+
+            // String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+            String emailPattern =  "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+
+                if (!email.matches(emailPattern)){
+                    etCorreo.requestFocus();
+                    etCorreo.setError("el email debe tener un formato valido");
+
+                    return;
+
+                }
+            }
+
+
         if (etPassword.getText().toString().isEmpty()) {
             Toast toast = Toast.makeText(Registro.this, "No se capturó el password de usuario", Toast.LENGTH_SHORT);
             toast.setGravity(Gravity.CENTER, 0, 0);
@@ -117,6 +137,7 @@ public class Registro extends AppCompatActivity {
 
         ctCliente objNvoCli = new ctCliente();
         objNvoCli.setiCliente(0);
+        objNvoCli.setcClave(etCorreo.getText().toString());
         objNvoCli.setcNombre(etNombre.getText().toString());
         objNvoCli.setcApellidos(etApPat.getText().toString() + " " + etApMat.getText().toString());
         objNvoCli.setcEmail(etCorreo.getText().toString());
@@ -211,12 +232,12 @@ public class Registro extends AppCompatActivity {
 
                             } else {
 
-                                Toast toast = Toast.makeText(Registro.this, "Pedido Realizado exitosamente: " + Mensaje, Toast.LENGTH_SHORT);
+                                Toast toast = Toast.makeText(Registro.this, "Registro completado exitosamente: " + Mensaje, Toast.LENGTH_SHORT);
                                 toast.setGravity(Gravity.CENTER, 0, 0);
                                 toast.show();
 
 
-                                Intent carrito = new Intent(Registro.this, MainActivity.class);
+                                Intent carrito = new Intent(Registro.this, Login.class);
                                 startActivity(carrito);
 
 

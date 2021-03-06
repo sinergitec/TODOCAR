@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context=".actividades.CreaDomicilio">
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="Calle"
+        android:hint="@string/calleHint"
         android:inputType="textPersonName"
         android:textColor="@color/colorPrimary"
         android:textColorHint="@color/colorPrimary"
@@ -43,7 +43,7 @@
         android:layout_marginEnd="2dp"
         android:layout_marginRight="2dp"
         android:ems="10"
-        android:hint="Num."
+        android:hint="N.I."
         android:inputType="textPersonName"
         android:textColorHint="@color/colorPrimary"
         android:textColor="@color/colorPrimary"
@@ -75,21 +75,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="65dp" />
+        app:layout_constraintGuide_begin="112dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="331dp" />
+        app:layout_constraintGuide_begin="320dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="98dp" />
+        app:layout_constraintGuide_begin="206dp" />
 
     <EditText
         android:id="@+id/etColonia"
@@ -98,6 +98,8 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Colonia"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/guideline10"
         app:layout_constraintEnd_toEndOf="parent"
@@ -111,6 +113,8 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="Delegación"
+        android:textColorHint="@color/colorPrimary"
+        android:textColor="@color/colorPrimary"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/guideline12"
         app:layout_constraintEnd_toEndOf="parent"
@@ -122,17 +126,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="134dp" />
+        app:layout_constraintGuide_begin="321dp" />
 
     <EditText
         android:id="@+id/etCP"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="4dp"
         android:layout_marginRight="4dp"
-        android:ems="10"
+        android:hint="C.P."
         android:inputType="textPostalAddress"
+        android:textColor="@color/colorPrimary"
+        android:textColorHint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toStartOf="@+id/button2"
         app:layout_constraintStart_toStartOf="parent"
@@ -142,6 +148,7 @@
         android:id="@+id/button2"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="20dp"
         android:text="Buscar cp"
         app:layout_constraintBottom_toTopOf="@+id/guideline14"
         app:layout_constraintEnd_toStartOf="@+id/guideline13"
@@ -153,20 +160,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="284dp" />
+        app:layout_constraintGuide_begin="258dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="179dp" />
+        app:layout_constraintGuide_begin="403dp" />
 
     <Button
         android:id="@+id/btnGuarda"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/et_buscador"
         android:text="guardar"
+        android:textColor="@color/colorText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline14" />

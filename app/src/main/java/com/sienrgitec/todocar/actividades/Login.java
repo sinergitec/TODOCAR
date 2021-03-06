@@ -101,6 +101,20 @@ public class Login extends AppCompatActivity {
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
             return;
+        }else{
+            String email    = etUsuario.getText().toString().trim();
+
+            // String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+
+            String emailPattern =  "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+
+            if (!email.matches(emailPattern)){
+                etUsuario.requestFocus();
+                etUsuario.setError("el email debe tener un formato valido");
+
+                return;
+
+            }
         }
 
         if (etPassword.getText().toString().isEmpty()) {
@@ -127,7 +141,7 @@ public class Login extends AppCompatActivity {
 
                             String Mensaje  = respuesta.getString("opcError");
                             Boolean Error   = respuesta.getBoolean("oplError");
-                            Boolean vlNuevoCli = respuesta.getBoolean("oplTieneDom");
+                            Boolean vlTieneDom = respuesta.getBoolean("oplTieneDom");
 
 
                             JSONObject ds_ctUsuario   = respuesta.getJSONObject("tt_ctUsuario");
@@ -152,13 +166,19 @@ public class Login extends AppCompatActivity {
 
                             } else {
                                 globales.g_ctUsuario   = ctUsuarioList.get(0);
-                                globales.g_ctDomicilio = ctDomicilioList.get(0);
                                 globales.g_ctCliente   = ctClienteList.get(0);
 
-                                if(vlNuevoCli == true ){
+                                //startActivity(new Intent(Login.this, MainActivity.class));
+
+                                if(vlTieneDom == false ){
+                                    Toast toast = Toast.makeText(Login.this, "¡Bienvenid@! para continuar debes registrar tu domicilio" , Toast.LENGTH_SHORT);
+                                    toast.setGravity(Gravity.CENTER, 0, 0);
+                                    toast.show();
+
                                     startActivity(new Intent(Login.this, CreaDomicilio.class));
 
                                 }else {
+                                    globales.g_ctDomicilio = ctDomicilioList.get(0);
                                     startActivity(new Intent(Login.this, MainActivity.class));
                                 }
                             }

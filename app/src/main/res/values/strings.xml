@@ -11,4 +11,12 @@
     <string name="registroBtn">Registrarte</string>
 
 
+
+    <string name="calleHint">Calle</string>
+    <string name="numExtHint">Num.</string>
+    <string name="numIntHint">Num. Int.</string>
+    <string name="coloniaHint">Colonia</string>
+    <string name="delegacionHint">Mpio/Del</string>
+    <string name="codigoPHint">CP</string>
+
 </resources>

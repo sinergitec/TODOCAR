@@ -2,6 +2,7 @@ package com.sienrgitec.todocar.actividades;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -138,6 +139,10 @@ public class AplicaPago extends AppCompatActivity {
                                     Log.e("AplicaPago-->", "ok");
                                 }
 
+
+
+                                GridLayoutManager grid = new GridLayoutManager(AplicaPago.this, 2);
+                                recycler.setLayoutManager(grid);
 
                                 AdapterFPago adapter = new AdapterFPago(AplicaPago.this,null);
                                 adapter.setList((List<ctFormasPago>) listafinal);

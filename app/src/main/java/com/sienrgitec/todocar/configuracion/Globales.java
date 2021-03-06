@@ -15,9 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Globales  {
-    //public static String URL          = "http://192.168.1.102:8083/painal/rest/painalService/";
+
     public static String URL          = "http://192.168.1.102:8043/rest/todocarService/";
-   // public static  String  URL = "http://sinergitecdemo.ddns.net:8083/painal/rest/painalService/";
+   // public static  String  URL = "http://sinergitecdemo.ddns.net:8043/rest/todocarService/";
 
     public static Integer vg_iArticulo = 0;
     public static Boolean vg_lPideCant = true;

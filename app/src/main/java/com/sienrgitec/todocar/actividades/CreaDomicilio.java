@@ -120,6 +120,7 @@ public class CreaDomicilio extends AppCompatActivity {
 
     public void GuardaDom(String ipcDomicilio){
 
+        ctDomicilioNvo.clear();
         Geocoder geocoder=new Geocoder(CreaDomicilio.this);
         List<Address> addressList;
 
@@ -145,10 +146,10 @@ public class CreaDomicilio extends AppCompatActivity {
 
 
         ctDomicilio objNvoDom = new ctDomicilio();
-        objNvoDom.setiDomicilio(globales.g_ctCliente.getiCliente());
-        objNvoDom.setiTipoDomicilio(0);
-        objNvoDom.setiTipoPersona(0);
-        objNvoDom.setiPersona(0);
+        objNvoDom.setiDomicilio(0);
+        objNvoDom.setiTipoDomicilio(1);
+        objNvoDom.setiTipoPersona(5);
+        objNvoDom.setiPersona(globales.g_ctCliente.getiCliente());
         objNvoDom.setcCalle(etCalle.getText().toString());
         objNvoDom.setcNumExt(etNE.getText().toString());
         objNvoDom.setcNumInt(etNI.getText().toString());
@@ -192,7 +193,7 @@ public class CreaDomicilio extends AppCompatActivity {
         getmRequestQueue();
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.POST, url + "ctCliente/", jsonBody, new Response.Listener<JSONObject>() {
+                (Request.Method.POST, url + "ctDomicilio/", jsonBody, new Response.Listener<JSONObject>() {
                     @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onResponse(JSONObject response) {
